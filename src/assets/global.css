@@ -1,0 +1,5 @@
+.input-standart {
+    @apply w-full;
+    @apply outline-none;
+    @apply border p-2 text-sm text-gray-400 rounded shadow;
+}
