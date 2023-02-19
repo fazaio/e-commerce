@@ -6,10 +6,22 @@ import currentShow from "../components/paginate/currentShow.vue";
 import { onMounted } from "vue";
 
 import { useProductStore } from "../stores/product";
+import paginatePrdocut from "../components/product/paginationProduct.vue";
+
+import type { queryProduct } from "../plugin/type/productType";
+
 const product = useProductStore();
 
 onMounted(() => {
-  product.getAllProduct();
+  let query: queryProduct = {
+    limit: 10,
+    page: 1,
+    price: [10000, 250000],
+    keyword: "",
+    order: ["product_name", "ASC"],
+  };
+
+  product.getAllProduct(query);
 });
 </script>
 
@@ -19,7 +31,7 @@ onMounted(() => {
       <homeHeader />
     </header>
     <nav class="my-4">
-      <button @click="product.getAllProduct()">BELANJA</button>
+      <button>BELANJA</button>
       <div class="dir">Home >> Produk >> Roasted Bean</div>
     </nav>
     <section class="grid gap-x-5 grid-cols-3 mx-2">
@@ -35,6 +47,7 @@ onMounted(() => {
             :img_slug="row['images'][0]['image_url']"
           />
         </div>
+        <paginatePrdocut />
       </section>
     </section>
   </main>

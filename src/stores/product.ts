@@ -1,9 +1,8 @@
-import type { userSchema } from "../plugin/type/userType";
 import { defineStore } from "pinia";
-import type { AxiosError } from "axios";
-import authStore from "./auth";
-import { reactive } from "vue";
 import { api } from "../plugin/axios";
+
+import type { AxiosError } from "axios";
+import type { queryProduct } from "../plugin/type/productType";
 
 // set token
 api.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
@@ -19,11 +18,16 @@ export const useProductStore = defineStore({
   },
 
   actions: {
-    async getAllProduct() {
+    async getAllProduct(params: queryProduct) {
       try {
-        const result = await api.get(
-          "api/product?keyword=&price=10000,250000&page=1&limit=10&order=product_name,ASC"
-        );
+        let query = {
+          price: params.price?.join().toString(),
+          limit: params.limit,
+          keyword: params.keyword,
+          page: params.page,
+          order: params.order?.join().toString(),
+        };
+        const result = await api.get("api/product", { params: query });
 
         this.allProduct = result.data.data.list;
 
