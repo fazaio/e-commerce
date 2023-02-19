@@ -14,6 +14,7 @@ export const useProductStore = defineStore({
   state: () => {
     return {
       allProduct: [],
+      totalAll: "",
     };
   },
 
@@ -29,9 +30,8 @@ export const useProductStore = defineStore({
         };
         const result = await api.get("api/product", { params: query });
 
+        this.totalAll = result.data.data.total;
         this.allProduct = result.data.data.list;
-
-        console.log(result);
       } catch (err) {
         console.log((err as AxiosError).response?.data);
       }
