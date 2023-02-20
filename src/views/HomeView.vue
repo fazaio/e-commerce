@@ -3,10 +3,10 @@ import listProduct from "../components/product/listProduct.vue";
 import homeHeader from "../components/homeHeader.vue";
 import navBars from "../components/navBars.vue";
 import currentShow from "../components/paginate/currentShow.vue";
+import paginatePrdocut from "../components/product/paginationProduct.vue";
 import { onMounted } from "vue";
 
 import { useProductStore } from "../stores/product";
-import paginatePrdocut from "../components/product/paginationProduct.vue";
 
 import type { queryProduct } from "../plugin/type/productType";
 
